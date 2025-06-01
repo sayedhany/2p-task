@@ -11,7 +11,6 @@ import { UserRole } from './core/enums/role.enum';
   styleUrl: './app.component.scss',
 })
 export class AppComponent implements OnInit {
-  title = 'task-app';
   authSrv = inject(AuthService);
   router = inject(Router);
   ngOnInit(): void {

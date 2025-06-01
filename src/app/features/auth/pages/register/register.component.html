@@ -4,32 +4,32 @@
       <h2 class="card-title text-center mb-4">Register as Beneficiary</h2>
       <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
         <div class="mb-3">
-          <label class="form-label">Name</label>
-          <input type="text" class="form-control" formControlName="name" />
+          <label class="form-label" for="name">Name</label>
+          <input id="name" type="text" class="form-control" formControlName="name" />
           <small class="text-danger" *ngIf="submitted && f['name'].errors?.['required']">Name is required</small>
         </div>
 
         <div class="mb-3">
-          <label class="form-label">Email</label>
-          <input type="email" class="form-control" formControlName="email" />
+          <label class="form-label" for="email">Email</label>
+          <input id="email" type="email" class="form-control" formControlName="email" />
           <small class="text-danger" *ngIf="submitted && f['email'].errors">Valid email is required</small>
         </div>
 
         <div class="mb-3">
-          <label class="form-label">Password</label>
-          <input type="password" class="form-control" formControlName="password" />
+          <label class="form-label" for="password">Password</label>
+          <input id="password" type="password" class="form-control" formControlName="password" />
           <small class="text-danger" *ngIf="submitted && f['password'].errors">Min 6 characters required</small>
         </div>
 
         <div class="mb-3">
-          <label class="form-label">Age</label>
-          <input type="number" class="form-control" formControlName="age" />
+          <label class="form-label" for="age">Age</label>
+          <input id="age" type="number" class="form-control" formControlName="age" />
           <small class="text-danger" *ngIf="submitted && f['age'].errors">Age must be 18 or above</small>
         </div>
 
         <div class="mb-3">
-          <label class="form-label">Gender</label>
-          <select class="form-select" formControlName="gender">
+          <label class="form-label" for="gender">Gender</label>
+          <select id="gender" class="form-select" formControlName="gender">
             <option value="">Select</option>
             <option value="Male">Male</option>
             <option value="Female">Female</option>
@@ -38,14 +38,15 @@
         </div>
 
         <div class="mb-3">
-          <label class="form-label">Contact</label>
-          <input type="text" class="form-control" formControlName="contact" />
+          <label class="form-label" for="contact">Contact</label>
+          <input id="contact" type="text" class="form-control" formControlName="contact" />
           <small class="text-danger" *ngIf="submitted && f['contact'].errors">Contact is required</small>
         </div>
 
         <div class="alert alert-danger" *ngIf="errorMessage">{{ errorMessage }}</div>
 
-        <button type="submit" class="btn btn-primary w-100">Register</button>
+        <button type="submit" class="btn btn-primary w-100 mb-2">Register</button>
+        <button type="button" class="btn btn-link w-100" [routerLink]="['/auth/login']">Back to Login</button>
       </form>
     </div>
   </div>

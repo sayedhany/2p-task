@@ -45,5 +45,28 @@
       "ratedId": 3,
       "score": 4
     }
+  ],
+  "beneficiaries": [
+    {
+      "id": "2",
+      "name": "Sarah",
+      "age": 28,
+      "gender": "Female",
+      "contact": "123456789"
+    },
+    {
+      "id": "3",
+      "name": "John",
+      "age": 35,
+      "gender": "Male",
+      "contact": "987654321"
+    },
+    {
+      "id": "e772",
+      "name": "sayed hany",
+      "age": 25,
+      "gender": "Male",
+      "contact": "01201500975"
+    }
   ]
 }
