@@ -23,18 +23,7 @@ export class AuthDeactivateGuard
   constructor(private authService: AuthService, private router: Router) {}
 
   canDeactivate(): boolean | UrlTree {
-    const user = this.authService.getCurrentUser();
-    if (user) {
-      if (user.role === UserRole.Admin) {
-        this.router.navigate(['/admin']);
-      } else if (user.role === UserRole.Beneficiary) {
-        this.router.navigate(['/beneficiary']);
-      }
-      return false;
-    } else {
-      this.router.navigate(['/auth/login']);
-
-      return false;
-    }
+    this.authService.checkLogedIn();
+    return false;
   }
 }

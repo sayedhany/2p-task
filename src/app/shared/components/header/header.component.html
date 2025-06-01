@@ -1,0 +1,11 @@
+<header class="navbar navbar-expand-lg navbar-light bg-light px-4">
+  <a class="navbar-brand fw-bold" href="#">Sayed</a>
+  <div class="ms-auto d-flex align-items-center">
+    @if(authSrv.getCurrentUser()){
+      <button class="btn btn-outline-success me-2" (click)="authSrv.logout()">Logout</button>
+    }@else {
+      <button class="btn btn-outline-primary me-2">Login</button>
+      <button class="btn btn-primary">Register</button>
+    }
+  </div>
+</header>

@@ -1,0 +1,66 @@
+<div class="container mt-4">
+  <h2 class="mb-3">Beneficiaries</h2>
+
+  <!-- Search -->
+  <div class="mb-3 row">
+    <div class="col-md-6">
+      <input
+        type="text"
+        class="form-control"
+        placeholder="Search by name..."
+        [value]="searchTerm()"
+        (input)="searchTerm.set($any($event.target).value)"
+      />
+    </div>
+  </div>
+
+  <!-- Table -->
+  <table class="table table-bordered table-hover">
+    <thead class="table-light">
+      <tr>
+        <th (click)="changeSort('name')" style="cursor: pointer">
+          Name
+          @if (sortField() === 'name') {
+            <span>
+              {{ sortDirection() === 'asc' ? '↑' : '↓' }}
+            </span>
+          }
+        </th>
+        <th (click)="changeSort('budget')" style="cursor: pointer">
+          Budget
+          @if (sortField() === 'budget') {
+            <span>
+              {{ sortDirection() === 'asc' ? '↑' : '↓' }}
+            </span>
+          }
+        </th>
+        <th>Age</th>
+        <th>Gender</th>
+        <th>Contact</th>
+        <th>View</th>
+      </tr>
+    </thead>
+    <tbody>
+      @for (b of filteredList(); track b.name) {
+        <tr>
+          <td>{{ b.name }}</td>
+          <td>${{ b.budget }}</td>
+          <td>{{ b.age }}</td>
+          <td>{{ b.gender }}</td>
+          <td>{{ b.contact }}</td>
+          <td>
+            <button class="btn btn-link p-0" [routerLink]="['/admin/profile', b.id]">
+              view
+            </button>
+          </td>
+        </tr>
+      }
+    </tbody>
+  </table>
+
+  @if (filteredList().length === 0) {
+    <div class="text-center text-muted mt-4">
+      No beneficiaries found.
+    </div>
+  }
+</div>

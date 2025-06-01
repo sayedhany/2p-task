@@ -10,14 +10,4 @@ import { UserRole } from './core/enums/role.enum';
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
 })
-export class AppComponent implements OnInit {
-  authSrv = inject(AuthService);
-  router = inject(Router);
-  ngOnInit(): void {
-    const user = this.authSrv.getCurrentUser();
-    if (user) {
-      if (user.role === UserRole.Admin) this.router.navigate(['/admin']);
-      else this.router.navigate(['/beneficiary']);
-    }
-  }
-}
+export class AppComponent {}

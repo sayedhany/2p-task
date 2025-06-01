@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import {
   FormBuilder,
   FormGroup,
@@ -17,7 +17,7 @@ import { CommonModule } from '@angular/common';
   styleUrl: './register.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class RegisterComponent {
+export class RegisterComponent implements OnInit {
   registerForm: FormGroup;
   submitted = false;
   errorMessage = '';
@@ -35,6 +35,9 @@ export class RegisterComponent {
       gender: ['', Validators.required],
       contact: ['', Validators.required],
     });
+  }
+  ngOnInit(): void {
+    this.authService.checkLogedIn();
   }
 
   get f() {

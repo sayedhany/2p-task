@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import {
   FormGroup,
   FormBuilder,
@@ -11,6 +11,7 @@ import { LoginPayload } from '../../../../core/models/login.model';
 import { User } from '../../../../core/models/user.model';
 import { CommonModule } from '@angular/common';
 import { map } from 'rxjs';
+import { UserRole } from '../../../../core/enums/role.enum';
 
 @Component({
   selector: 'app-login',
@@ -20,7 +21,7 @@ import { map } from 'rxjs';
   styleUrl: './login.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class LoginComponent {
+export class LoginComponent implements OnInit {
   loginForm: FormGroup;
   submitted = false;
   errorMessage = '';
@@ -35,6 +36,9 @@ export class LoginComponent {
       password: ['', Validators.required],
       role: ['', Validators.required],
     });
+  }
+  ngOnInit(): void {
+    this.authService.checkLogedIn();
   }
 
   get f() {

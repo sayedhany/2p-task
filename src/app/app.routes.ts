@@ -1,6 +1,7 @@
 import { Routes } from '@angular/router';
 import { AdminGuard } from './core/gaurds/admin.guard';
 import { AuthDeactivateGuard } from './core/gaurds/auth.guard';
+import { LayoutComponent } from './shared/components/layout/layout.component';
 
 export const routes: Routes = [
   { path: '', redirectTo: 'auth/login', pathMatch: 'full' },
@@ -11,19 +12,29 @@ export const routes: Routes = [
       import('./features/auth/auth.module').then((m) => m.AuthModule),
   },
   {
-    path: 'admin',
-    canActivate: [AdminGuard],
-    loadChildren: () =>
-      import('./features/admin/admin.module').then((m) => m.AdminModule),
+    path: '',
+    component: LayoutComponent,
+    children: [
+      {
+        path: 'admin',
+        canActivate: [AdminGuard],
+        loadChildren: () =>
+          import('./features/admin/admin.module').then((m) => m.AdminModule),
+      },
+      {
+        path: 'beneficiary',
+        loadChildren: () =>
+          import('./features/beneficiaries/beneficiaries.module').then(
+            (m) => m.BeneficiariesModule
+          ),
+      },
+    ],
   },
   {
-    path: 'beneficiary',
-    loadChildren: () =>
-      import('./features/beneficiaries/beneficiaries.module').then(
-        (m) => m.BeneficiariesModule
-      ),
+    path: '**',
+    redirectTo: 'auth/login',
+    pathMatch: 'full',
   },
-  { path: '**', redirectTo: 'auth/login', pathMatch: 'full' },
   // 🔓 Public Routes (No Authentication Needed)
   // { path: 'login', component: LoginComponent },
   // { path: 'register', component: RegisterComponent },
