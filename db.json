@@ -1,14 +1,14 @@
 {
   "users": [
     {
-      "id": 1,
+      "id": "1",
       "name": "Admin User",
       "email": "admin@example.com",
       "password": "admin123",
       "role": "Admin"
     },
     {
-      "id": 2,
+      "id": "2",
       "name": "Sarah",
       "email": "sarah@example.com",
       "password": "sarah123",
@@ -18,7 +18,7 @@
       "contact": "123456789"
     },
     {
-      "id": 3,
+      "id": "3",
       "name": "John",
       "email": "john@example.com",
       "password": "john123",
@@ -26,11 +26,21 @@
       "age": 35,
       "gender": "Male",
       "contact": "987654321"
+    },
+    {
+      "id": "e772",
+      "name": "sayed hany",
+      "email": "sayed@mail.ru",
+      "password": "012692281",
+      "age": 25,
+      "gender": "Male",
+      "contact": "01201500975",
+      "role": "Beneficiary"
     }
   ],
   "ratings": [
     {
-      "id": 1,
+      "id": "1",
       "raterId": 2,
       "ratedId": 3,
       "score": 4

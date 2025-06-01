@@ -1,20 +1,25 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable, tap } from 'rxjs';
 import { User } from '../models/user.model';
 import { UserRole } from '../enums/role.enum';
 import { LoginPayload } from '../models/login.model';
-
+const baseURL = 'http://localhost:3001';
 @Injectable({ providedIn: 'root' })
 export class AuthService {
   private currentUserSubject = new BehaviorSubject<User | null>(null);
 
   constructor(private http: HttpClient) {}
 
-  login(credentials: LoginPayload): Observable<User> {
+  login(credentials: LoginPayload): Observable<User[]> {
     return this.http
-      .post<User>('/api/login', credentials)
-      .pipe(tap((user) => this.currentUserSubject.next(user)));
+      .get<User[]>(
+        `${baseURL}/users?email=${credentials.email}&password=${credentials.password}&role=${credentials.role}`
+      )
+      .pipe(tap((user) => this.currentUserSubject.next(user[0])));
+  }
+  register(user: User): Observable<User> {
+    return this.http.post<User>(`${baseURL}/users`, user);
   }
 
   get currentUser(): Observable<User | null> {
@@ -23,6 +28,11 @@ export class AuthService {
 
   get currentRole(): UserRole | null {
     return this.currentUserSubject.value?.role || null;
+  }
+
+  getCurrentUser(): User | null {
+    const userJson = localStorage.getItem('currentUser');
+    return userJson ? JSON.parse(userJson) : null;
   }
 
   isAdmin(): boolean {

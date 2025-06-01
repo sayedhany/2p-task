@@ -1,1 +1,52 @@
-<p>register works!</p>
+<div class="container mt-5">
+  <div class="card mx-auto" style="max-width: 500px;">
+    <div class="card-body">
+      <h2 class="card-title text-center mb-4">Register as Beneficiary</h2>
+      <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+        <div class="mb-3">
+          <label class="form-label">Name</label>
+          <input type="text" class="form-control" formControlName="name" />
+          <small class="text-danger" *ngIf="submitted && f['name'].errors?.['required']">Name is required</small>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label">Email</label>
+          <input type="email" class="form-control" formControlName="email" />
+          <small class="text-danger" *ngIf="submitted && f['email'].errors">Valid email is required</small>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label">Password</label>
+          <input type="password" class="form-control" formControlName="password" />
+          <small class="text-danger" *ngIf="submitted && f['password'].errors">Min 6 characters required</small>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label">Age</label>
+          <input type="number" class="form-control" formControlName="age" />
+          <small class="text-danger" *ngIf="submitted && f['age'].errors">Age must be 18 or above</small>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label">Gender</label>
+          <select class="form-select" formControlName="gender">
+            <option value="">Select</option>
+            <option value="Male">Male</option>
+            <option value="Female">Female</option>
+          </select>
+          <small class="text-danger" *ngIf="submitted && f['gender'].errors">Gender is required</small>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label">Contact</label>
+          <input type="text" class="form-control" formControlName="contact" />
+          <small class="text-danger" *ngIf="submitted && f['contact'].errors">Contact is required</small>
+        </div>
+
+        <div class="alert alert-danger" *ngIf="errorMessage">{{ errorMessage }}</div>
+
+        <button type="submit" class="btn btn-primary w-100">Register</button>
+      </form>
+    </div>
+  </div>
+</div>

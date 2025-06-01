@@ -1,1 +1,36 @@
-<p>login works!</p>
+<div class="login-container card user p-4" style="max-width: 400px; margin: 2rem auto;">
+  <h2 class="card-title text-center mb-4">Login</h2>
+
+  <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="card-body">
+    <div class="mb-3">
+      <label class="form-label">Email</label>
+      <input type="email" formControlName="email" class="form-control" />
+      @if(submitted && f['email'].errors){
+        <small class="text-danger">Valid email is required</small>
+      }
+    </div>
+
+    <div class="mb-3">
+      <label class="form-label">Password</label>
+      <input type="password" formControlName="password" class="form-control" />
+      @if (submitted && f['password'].errors){
+        <small class="text-danger">Password is required</small>
+      }
+      <!-- <small *ngIf="submitted && f['password'].errors" class="text-danger">Password is required</small> -->
+    </div>
+
+    <div class="mb-3">
+      <label class="form-label">Role</label>
+      <select formControlName="role" class="form-control">
+        <option value="" disabled selected>Select role</option>
+        <option value="Admin">Admin</option>
+        <option value="Beneficiary">Beneficiary</option>
+      </select>
+      <small *ngIf="submitted && f['role'].errors" class="text-danger">Role is required</small>
+    </div>
+
+    <div class="error text-danger mb-3" *ngIf="errorMessage">{{ errorMessage }}</div>
+
+    <button type="submit" class="btn btn-primary w-100">Login</button>
+  </form>
+</div>

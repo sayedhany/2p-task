@@ -1,10 +1,12 @@
 import { Routes } from '@angular/router';
 import { AdminGuard } from './core/gaurds/admin.guard';
+import { AuthDeactivateGuard } from './core/gaurds/auth.guard';
 
 export const routes: Routes = [
   { path: '', redirectTo: 'auth/login', pathMatch: 'full' },
   {
     path: 'auth',
+    // canDeactivate: [AuthDeactivateGuard],
     loadChildren: () =>
       import('./features/auth/auth.module').then((m) => m.AuthModule),
   },
@@ -12,12 +14,14 @@ export const routes: Routes = [
     path: 'admin',
     canActivate: [AdminGuard],
     loadChildren: () =>
-      import('./features/auth/auth.module').then((m) => m.AuthModule),
+      import('./features/admin/admin.module').then((m) => m.AdminModule),
   },
   {
     path: 'beneficiary',
     loadChildren: () =>
-      import('./features/auth/auth.module').then((m) => m.AuthModule),
+      import('./features/beneficiaries/beneficiaries.module').then(
+        (m) => m.BeneficiariesModule
+      ),
   },
   { path: '**', redirectTo: 'auth/login', pathMatch: 'full' },
   // 🔓 Public Routes (No Authentication Needed)
