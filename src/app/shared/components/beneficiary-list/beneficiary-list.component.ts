@@ -3,17 +3,14 @@ import {
   ChangeDetectionStrategy,
   Component,
   computed,
+  inject,
   signal,
 } from '@angular/core';
 import { RouterLink } from '@angular/router';
-interface Beneficiary {
-  id: string;
-  name: string;
-  budget: number;
-  age: number;
-  gender: string;
-  contact: string;
-}
+import { Beneficiary } from '../../models/beneficiary.model';
+import { toSignal } from '@angular/core/rxjs-interop';
+import { BeneficiaryService } from '../../services/beneficiary.service';
+
 @Component({
   selector: 'app-beneficiary-list',
   standalone: true,
@@ -24,32 +21,8 @@ interface Beneficiary {
 })
 export class BeneficiaryListComponent {
   // Signals
-  private _beneficiaries = signal<Beneficiary[]>([
-    {
-      id: '1',
-      name: 'John Doe',
-      budget: 5000,
-      age: 30,
-      gender: 'Male',
-      contact: 'john@example.com',
-    },
-    {
-      id: '2',
-      name: 'Anna Smith',
-      budget: 7000,
-      age: 28,
-      gender: 'Female',
-      contact: 'anna@example.com',
-    },
-    {
-      id: '3',
-      name: 'Mike Johnson',
-      budget: 6000,
-      age: 35,
-      gender: 'Male',
-      contact: 'mike@example.com',
-    },
-  ]);
+  beneficiarySrv = inject(BeneficiaryService);
+  private _beneficiaries = toSignal(this.beneficiarySrv.getBeneficiaries());
 
   searchTerm = signal('');
   sortField = signal<'name' | 'budget'>('name');
@@ -61,11 +34,11 @@ export class BeneficiaryListComponent {
     const field = this.sortField();
     const direction = this.sortDirection();
 
-    let filtered = this._beneficiaries().filter((b) =>
+    let filtered = this._beneficiaries()?.filter((b) =>
       b.name.toLowerCase().includes(search)
     );
 
-    return filtered.sort((a, b) => {
+    return filtered?.sort((a, b) => {
       const valueA = a[field];
       const valueB = b[field];
 

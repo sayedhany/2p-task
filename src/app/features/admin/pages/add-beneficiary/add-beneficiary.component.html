@@ -1,1 +1,115 @@
-<p>add-beneficiary works!</p>
+<div class="container mt-4">
+  <h3 class="mb-4">Add New Beneficiary</h3>
+
+  <form [formGroup]="form" (ngSubmit)="save()" novalidate>
+    <div class="row mb-3">
+      <div class="col-md-6">
+        <label for="name" class="form-label">Full Name</label>
+        <input
+          id="name"
+          type="text"
+          class="form-control"
+          formControlName="name"
+          [class.is-invalid]="submitted && f['name'].invalid"
+        />
+        @if(submitted && f['name'].invalid) {
+          <div class="invalid-feedback">
+            Name is required.
+          </div>
+        }
+        
+      </div>
+
+      <div class="col-md-3">
+        <label for="age" class="form-label">Age</label>
+        <input
+          id="age"
+          type="number"
+          class="form-control"
+          formControlName="age"
+          [class.is-invalid]="submitted && f['age'].invalid"
+        />
+        @if(submitted && f['age'].invalid) {
+          <div class="invalid-feedback">
+            Age must be 18 or above.
+          </div>
+        }
+      </div>
+
+      <div class="col-md-3">
+        <label class="form-label">Gender</label>
+        <select
+          class="form-select"
+          formControlName="gender"
+          [class.is-invalid]="submitted && f['gender'].invalid"
+        >
+          <option value="">-- Select --</option>
+          <option value="Male">Male</option>
+          <option value="Female">Female</option>
+        </select>
+        @if(submitted && f['gender'].invalid){
+          <div class="invalid-feedback">
+            Gender is required.
+          </div>
+        }
+        
+      </div>
+    </div>
+
+    <div class="row mb-3">
+      <div class="col-md-6">
+        <label for="budget" class="form-label">Budget</label>
+        <input
+          id="budget"
+          type="number"
+          class="form-control"
+          formControlName="budget"
+          [class.is-invalid]="submitted && f['budget'].invalid"
+        />
+        @if(submitted && f['budget'].invalid) {
+        <div class="invalid-feedback">
+          Budget must be a positive number.
+          </div>
+        }
+        
+      </div>
+
+      <div class="col-md-6">
+        <label for="email" class="form-label">Email</label>
+        <input
+          id="email"
+          type="email"
+          class="form-control"
+          formControlName="email"
+          [class.is-invalid]="submitted && f['email'].invalid"
+        />
+        @if (submitted && f['email'].invalid) {
+
+          <div class="invalid-feedback">
+            Enter a valid email.
+          </div>
+        }
+      </div>
+    </div>
+
+    <div class="mb-3">
+      <label for="contact" class="form-label">Contact</label>
+      <input
+        id="contact"
+        type="text"
+        class="form-control"
+        formControlName="contact"
+        [class.is-invalid]="submitted && f['contact'].invalid"
+      />
+      @if (submitted && f['contact'].invalid) {
+        <div class="invalid-feedback">
+          contact must be at least 7 digits.
+        </div>
+      }
+    </div>
+
+    <div class="text-end">
+      <button type="submit" class="btn btn-primary">Save Beneficiary</button>
+    </div>
+  </form>
+</div>
