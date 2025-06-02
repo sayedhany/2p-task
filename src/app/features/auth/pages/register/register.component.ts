@@ -37,7 +37,7 @@ export class RegisterComponent implements OnInit {
     });
   }
   ngOnInit(): void {
-    this.authService.checkLogedIn();
+    // this.authService.checkLogedIn();
   }
 
   get f() {

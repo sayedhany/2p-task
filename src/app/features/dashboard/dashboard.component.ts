@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
-import { BeneficiaryListComponent } from '../beneficiary-list/beneficiary-list.component';
+import { BeneficiaryListComponent } from '../../shared/components/beneficiary-list/beneficiary-list.component';
 import { RouterLink } from '@angular/router';
-import { AuthService } from '../../../core/auth/auth.service';
+import { AuthService } from '../../core/auth/auth.service';
 
 @Component({
   selector: 'app-dashboard',

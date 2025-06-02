@@ -38,7 +38,7 @@ export class LoginComponent implements OnInit {
     });
   }
   ngOnInit(): void {
-    this.authService.checkLogedIn();
+    // this.authService.checkLogedIn();
   }
 
   get f() {
@@ -58,11 +58,7 @@ export class LoginComponent implements OnInit {
         next: (user: User | null) => {
           if (user) {
             localStorage.setItem('currentUser', JSON.stringify(user));
-            if (user.role === 'Admin') {
-              this.router.navigate(['/admin']);
-            } else {
-              this.router.navigate(['/beneficiary']);
-            }
+            this.router.navigate(['/dashboard']);
           } else {
             this.errorMessage = 'Invalid email or password';
           }

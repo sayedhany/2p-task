@@ -5,9 +5,9 @@ import {
   Validators,
   ReactiveFormsModule,
 } from '@angular/forms';
-import { BeneficiaryService } from '../../../../shared/services/beneficiary.service';
+import { BeneficiaryService } from '../../shared/services/beneficiary.service';
 import { Router } from '@angular/router';
-import Swal from '../../../../core/swal';
+import Swal from '../../core/swal';
 @Component({
   selector: 'app-add-beneficiary',
   standalone: true,

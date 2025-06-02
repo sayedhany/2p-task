@@ -14,6 +14,6 @@ export interface Beneficiary {
     ratingsrId: number; // ID of the rater (could be a user or admin)
     ratingsdId: number; // ID of the rated beneficiary
     score: number; // Rating score, e.g., 1-5
-  };
+  }[];
   role?: string; // Optional field for role, if needed
 }

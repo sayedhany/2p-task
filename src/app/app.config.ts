@@ -9,7 +9,7 @@ import { routes } from './app.routes';
 import { AdminGuard } from './core/gaurds/admin.guard';
 import { AuthService } from './core/auth/auth.service';
 import { HttpClientModule } from '@angular/common/http';
-import { AuthDeactivateGuard } from './core/gaurds/auth.guard';
+import { AuthGuard } from './core/gaurds/auth.guard';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -17,7 +17,7 @@ export const appConfig: ApplicationConfig = {
     provideRouter(routes),
     importProvidersFrom(HttpClientModule),
     AdminGuard,
-    AuthDeactivateGuard,
+    AuthGuard,
     AuthService,
   ],
 };

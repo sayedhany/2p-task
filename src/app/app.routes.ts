@@ -1,13 +1,13 @@
 import { Routes } from '@angular/router';
 import { AdminGuard } from './core/gaurds/admin.guard';
-import { AuthDeactivateGuard } from './core/gaurds/auth.guard';
+import { AuthGuard } from './core/gaurds/auth.guard';
 import { LayoutComponent } from './shared/components/layout/layout.component';
 
 export const routes: Routes = [
-  { path: '', redirectTo: 'beneficiary', pathMatch: 'full' },
+  { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
   {
     path: 'auth',
-    // canDeactivate: [AuthDeactivateGuard],
+    canActivate: [AuthGuard],
     loadChildren: () =>
       import('./features/auth/auth.module').then((m) => m.AuthModule),
   },
@@ -16,22 +16,24 @@ export const routes: Routes = [
     component: LayoutComponent,
     children: [
       {
-        path: 'admin',
-        canActivate: [AdminGuard],
-        loadChildren: () =>
-          import('./features/admin/admin.module').then((m) => m.AdminModule),
+        path: 'dashboard',
+        loadComponent: () =>
+          import('./features/dashboard/dashboard.component').then(
+            (e) => e.DashboardComponent
+          ),
       },
       {
-        path: 'beneficiary',
-        loadChildren: () =>
-          import('./features/beneficiaries/beneficiaries.module').then(
-            (m) => m.BeneficiariesModule
+        path: 'add-beneficiary',
+        canActivate: [AdminGuard],
+        loadComponent: () =>
+          import('./features/add-beneficiary/add-beneficiary.component').then(
+            (e) => e.AddBeneficiaryComponent
           ),
       },
       {
         path: 'profile/:id',
         loadComponent: () =>
-          import('./shared/components/profile/profile.component').then(
+          import('./features/profile/profile.component').then(
             (e) => e.ProfileComponent
           ),
       },

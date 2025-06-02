@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import {
-  CanDeactivate,
+  CanActivate,
   Router,
   ActivatedRouteSnapshot,
   RouterStateSnapshot,
@@ -8,22 +8,21 @@ import {
 } from '@angular/router';
 import { Observable } from 'rxjs';
 import { AuthService } from '../auth/auth.service';
-import { UserRole } from '../enums/role.enum';
-
-export interface CanComponentDeactivate {
-  canDeactivate: () => boolean | Observable<boolean>;
-}
 
 @Injectable({
   providedIn: 'root',
 })
-export class AuthDeactivateGuard
-  implements CanDeactivate<CanComponentDeactivate>
-{
+export class AuthGuard implements CanActivate {
   constructor(private authService: AuthService, private router: Router) {}
 
-  canDeactivate(): boolean | UrlTree {
-    this.authService.checkLogedIn();
-    return false;
+  canActivate(
+    route: ActivatedRouteSnapshot,
+    state: RouterStateSnapshot
+  ): boolean | UrlTree {
+    if (!this.authService.isLoggedIn()) {
+      return true;
+    }
+    // Redirect to login or another route if not logged in
+    return this.router.createUrlTree(['/dashboard']);
   }
 }

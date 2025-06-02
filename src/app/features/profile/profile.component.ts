@@ -6,16 +6,18 @@ import {
   signal,
 } from '@angular/core';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
-import { BeneficiaryService } from '../../services/beneficiary.service';
-import { Beneficiary } from '../../models/beneficiary.model';
-import { CurrencyPipe } from '@angular/common';
-import { AuthService } from '../../../core/auth/auth.service';
-import Swal from '../../../core/swal';
+import { BeneficiaryService } from '../../shared/services/beneficiary.service';
+import { Beneficiary } from '../../shared/models/beneficiary.model';
+import { AsyncPipe, CurrencyPipe } from '@angular/common';
+import { AuthService } from '../../core/auth/auth.service';
+import Swal from '../../core/swal';
+import { User } from '../../core/models/user.model';
+import { map, Observable } from 'rxjs';
 
 @Component({
   selector: 'app-profile',
   standalone: true,
-  imports: [RouterLink, CurrencyPipe],
+  imports: [RouterLink, CurrencyPipe, AsyncPipe],
   templateUrl: './profile.component.html',
   styleUrl: './profile.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -23,7 +25,7 @@ import Swal from '../../../core/swal';
 export class ProfileComponent implements OnInit {
   route = inject(ActivatedRoute);
   beneficiarySrv = inject(BeneficiaryService);
-  authSrv = inject(AuthService);
+  public authSrv = inject(AuthService);
   router = inject(Router);
   details = signal<Beneficiary | null>(null);
   // constructor(private route: ActivatedRoute) {}
@@ -73,7 +75,7 @@ export class ProfileComponent implements OnInit {
         .addRatingToBeneficiary(id as string, newRating)
         .subscribe(() => {
           Swal.fire('Thank you!', `You rated: ${rating}`, 'success').then(() =>
-            this.router.navigate(['/beneficiary'])
+            this.router.navigate(['/dashboard'])
           );
         });
     }

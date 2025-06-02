@@ -32,7 +32,20 @@
         </tr>
       </tbody>
     </table>
-    <button class="btn btn-primary" routerLink="../../">Go Back</button>
+    
+    <!-- <ng-container ></ng-container> -->
+    @if(details()?.ratings){
+      <h6>Ratings:</h6>
+      @for (rating of details()?.ratings ?? []; track rating) {
+        <ul class="list-group mb-3">
+          <li class="list-group-item">
+            Score: {{ rating.score }}
+            <span class="text-muted ms-2">(From: {{ rating.ratingsrId }}, To: {{ rating.ratingsdId }})</span>
+          </li>
+        </ul>
+      }
+    }
+    <button class="btn btn-primary" routerLink="../">Go Back</button>
     @if(!(details()?.id === authSrv.getCurrentUser()?.id) && authSrv.isBeneficiary()) {
       <!-- <button class="btn btn-warning ms-2" routerLink="/beneficiary/edit">Edit Profile</button> -->
       <button class="btn btn-success ms-2" type="button" (click)="rateBeneficiary(details()?.id || null )">Rate</button>

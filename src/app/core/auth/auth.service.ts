@@ -52,15 +52,7 @@ export class AuthService {
   isBeneficiary(): boolean {
     return this.getCurrentUser()?.role === UserRole.Beneficiary;
   }
-  checkLogedIn() {
-    const user = this.getCurrentUser();
-    if (user) {
-      if (user.role === UserRole.Admin) {
-        this.router.navigate(['/admin']);
-      } else if (user.role === UserRole.Beneficiary) {
-        this.router.navigate(['/beneficiary']);
-      }
-    }
+  getUserById(id: number): Observable<User> {
+    return this.http.get<User>(`${baseURL}/users/${id}`);
   }
-  
 }
