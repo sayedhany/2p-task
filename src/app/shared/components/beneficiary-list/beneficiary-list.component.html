@@ -15,63 +15,62 @@
   </div>
 
   <!-- Table -->
-  <table class="table table-bordered table-hover">
-    <thead class="table-light">
-      <tr>
-        <th (click)="changeSort('name')" style="cursor: pointer">
-          Name
-          @if (sortField() === 'name') {
-            <span>
-              {{ sortDirection() === 'asc' ? '↑' : '↓' }}
-            </span>
-          }
-        </th>
-        <th (click)="changeSort('budget')" style="cursor: pointer">
-          Budget
-          @if (sortField() === 'budget') {
-            <span>
-              {{ sortDirection() === 'asc' ? '↑' : '↓' }}
-            </span>
-          }
-        </th>
-        <th>Age</th>
-        <th>Gender</th>
-        <th>Contact</th>
-        <th>Status</th>
-        <th>Actions</th>
-        
-        
-      </tr>
-    </thead>
-    <tbody>
-      @for (b of filteredList(); track b.name) {
+  <div class="table-responsive">
+    <table class="table table-bordered table-hover">
+      <thead class="table-light">
         <tr>
-          <td>{{ b.name }}</td>
-          <td>${{ b.budget }}</td>
-          <td>{{ b.age }}</td>
-          <td>{{ b.gender }}</td>
-          <td>{{ b.contact }}</td>
-          <td><span class="p-1" [style]="getStatusStyles(b.status)">{{ b.status }}</span></td>
-          <td class="d-flex gap-2">
-            @if((authSrv.isAdmin()) && b.status === 'Pending') {
-            <button class="btn btn-link p-0" (click)="approveBeneficiary(b.id)">
-              Approve
-            </button>
-          }
-          @if (authSrv.isBeneficiary()){
-            <button class="btn btn-link p-0" (click)="rateBeneficiary(b.id)">
-              Rate
-            </button>
-          }
-            <button class="btn btn-link p-0" (click)="viewBeneficiary(b.id)">
-              View
-            </button>
-          </td>
-          
+          <th (click)="changeSort('name')" style="cursor: pointer">
+            Name
+            @if (sortField() === 'name') {
+              <span>
+                {{ sortDirection() === 'asc' ? '↑' : '↓' }}
+              </span>
+            }
+          </th>
+          <th (click)="changeSort('budget')" style="cursor: pointer">
+            Budget
+            @if (sortField() === 'budget') {
+              <span>
+                {{ sortDirection() === 'asc' ? '↑' : '↓' }}
+              </span>
+            }
+          </th>
+          <th>Age</th>
+          <th>Gender</th>
+          <th>Contact</th>
+          <th>Status</th>
+          <th>Actions</th>
         </tr>
-      }
-    </tbody>
-  </table>
+      </thead>
+      <tbody>
+        @for (b of filteredList(); track b.name) {
+          <tr>
+            <td>{{ b.name }}</td>
+            <td>${{ b.budget }}</td>
+            <td>{{ b.age }}</td>
+            <td>{{ b.gender }}</td>
+            <td>{{ b.contact }}</td>
+            <td><span class="p-1" [style]="getStatusStyles(b.status)">{{ b.status }}</span></td>
+            <td class="d-flex gap-2">
+              @if((authSrv.isAdmin()) && b.status === 'Pending') {
+              <button class="btn btn-link p-0" (click)="approveBeneficiary(b.id)">
+                Approve
+              </button>
+            }
+            @if (authSrv.isBeneficiary()){
+              <button class="btn btn-link p-0" (click)="rateBeneficiary(b.id)">
+                Rate
+              </button>
+            }
+              <button class="btn btn-link p-0" (click)="viewBeneficiary(b.id)">
+                View
+              </button>
+            </td>
+          </tr>
+        }
+      </tbody>
+    </table>
+  </div>
 
   @if (filteredList()?.length === 0) {
     <div class="text-center text-muted mt-4">
