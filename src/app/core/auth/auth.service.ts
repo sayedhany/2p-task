@@ -40,13 +40,17 @@ export class AuthService {
     const userJson = localStorage.getItem('currentUser');
     return userJson ? JSON.parse(userJson) : null;
   }
+  isLoggedIn(): boolean {
+    const user = this.getCurrentUser();
+    return user !== null && user.role !== undefined;
+  }
 
   isAdmin(): boolean {
     return this.getCurrentUser()?.role === UserRole.Admin;
   }
 
   isBeneficiary(): boolean {
-    return this.currentRole === UserRole.Beneficiary;
+    return this.getCurrentUser()?.role === UserRole.Beneficiary;
   }
   checkLogedIn() {
     const user = this.getCurrentUser();
@@ -56,8 +60,6 @@ export class AuthService {
       } else if (user.role === UserRole.Beneficiary) {
         this.router.navigate(['/beneficiary']);
       }
-    } else {
-      this.router.navigate(['/auth/login']);
     }
   }
 }

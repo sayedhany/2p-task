@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { environment } from '../../../environments/environment.development';
 import { Beneficiary } from '../models/beneficiary.model';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { BehaviorSubject, Observable, switchMap } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -31,6 +31,22 @@ export class BeneficiaryService {
   getBeneficiaryById(beneficiaryId: string): Observable<Beneficiary> {
     return this.http.get<Beneficiary>(
       `${environment.baseUrl}/beneficiaries/${beneficiaryId}`
+    );
+  }
+  addRatingToBeneficiary(
+    beneficiaryId: string,
+    rating: { ratingsrId: string; ratingsdId: string; score: number }
+  ): Observable<Beneficiary> {
+    return this.getBeneficiaryById(beneficiaryId).pipe(
+      switchMap((beneficiary) => {
+        const updatedRatings = Array.isArray(beneficiary.ratings)
+          ? [...beneficiary.ratings, rating]
+          : [rating];
+        return this.http.patch<Beneficiary>(
+          `${environment.baseUrl}/beneficiaries/${beneficiaryId}`,
+          { ratings: updatedRatings }
+        );
+      })
     );
   }
 }

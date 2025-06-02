@@ -5,7 +5,7 @@ const routes: Routes = [
   {
     path: '',
     loadComponent: () =>
-      import('./pages/dashboard/dashboard.component').then(
+      import('../../shared/components/dashboard/dashboard.component').then(
         (e) => e.DashboardComponent
       ),
   },
@@ -16,13 +16,7 @@ const routes: Routes = [
         (e) => e.AddBeneficiaryComponent
       ),
   },
-  {
-    path: 'profile/:id',
-    loadComponent: () =>
-      import('./pages/profile/profile.component').then(
-        (e) => e.ProfileComponent
-      ),
-  },
+  
 ];
 
 @NgModule({

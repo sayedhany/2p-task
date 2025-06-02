@@ -4,7 +4,7 @@ import { AuthDeactivateGuard } from './core/gaurds/auth.guard';
 import { LayoutComponent } from './shared/components/layout/layout.component';
 
 export const routes: Routes = [
-  { path: '', redirectTo: 'auth/login', pathMatch: 'full' },
+  { path: '', redirectTo: 'beneficiary', pathMatch: 'full' },
   {
     path: 'auth',
     // canDeactivate: [AuthDeactivateGuard],
@@ -26,6 +26,13 @@ export const routes: Routes = [
         loadChildren: () =>
           import('./features/beneficiaries/beneficiaries.module').then(
             (m) => m.BeneficiariesModule
+          ),
+      },
+      {
+        path: 'profile/:id',
+        loadComponent: () =>
+          import('./shared/components/profile/profile.component').then(
+            (e) => e.ProfileComponent
           ),
       },
     ],

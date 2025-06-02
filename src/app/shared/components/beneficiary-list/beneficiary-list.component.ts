@@ -7,7 +7,7 @@ import {
   OnInit,
   signal,
 } from '@angular/core';
-import { RouterLink } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { Beneficiary } from '../../models/beneficiary.model';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { BeneficiaryService } from '../../services/beneficiary.service';
@@ -26,6 +26,7 @@ export class BeneficiaryListComponent implements OnInit {
   public beneficiarySrv = inject(BeneficiaryService);
   private _beneficiaries = toSignal(this.beneficiarySrv.beneficiaries$);
   public authSrv = inject(AuthService);
+  router = inject(Router);
   ngOnInit(): void {
     this.beneficiarySrv.getBeneficiaries();
   }
@@ -107,6 +108,55 @@ export class BeneficiaryListComponent implements OnInit {
         return { color: '#721c24', background: '#f8d7da' };
       default:
         return { color: '#6c757d', background: '#e2e3e5' };
+    }
+  }
+  viewBeneficiary(id: string) {
+    if (this.authSrv.isLoggedIn()) {
+      this.router.navigate(['/profile', id]);
+    } else {
+      Swal.fire({
+        icon: 'error',
+        title: 'Access Denied',
+        text: 'You must be logged in to view beneficiary details.',
+      }).then(() => {
+        this.router.navigate(['/auth/login']);
+      });
+    }
+  }
+  async rateBeneficiary(id: string) {
+    const { value: rating } = await Swal.fire({
+      title: 'Rate Beneficiary',
+      input: 'range',
+      inputLabel: 'Your rating (1-5)',
+      inputAttributes: {
+        min: '1',
+        max: '5',
+        step: '1',
+      },
+      inputValue: 3,
+      showCancelButton: true,
+      confirmButtonText: 'Submit',
+      inputValidator: (value) => {
+        if (!value) {
+          return 'You need to provide a rating!';
+        }
+        return null;
+      },
+    });
+
+    if (rating) {
+      // You can now use the rating value, e.g., send to API
+      // Example: this.beneficiarySrv.rateBeneficiary(id, rating).subscribe(...)
+      const newRating = {
+        score: +rating as number,
+        ratingsrId: String(this.authSrv.getCurrentUser()?.id), // Assuming you have a way to get the current user's ID
+        ratingsdId: String(id),
+      };
+      this.beneficiarySrv
+        .addRatingToBeneficiary(id, newRating)
+        .subscribe(() => {
+          Swal.fire('Thank you!', `You rated: ${rating}`, 'success');
+        });
     }
   }
 }

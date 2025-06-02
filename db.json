@@ -38,14 +38,6 @@
       "role": "Beneficiary"
     }
   ],
-  "ratings": [
-    {
-      "id": "1",
-      "raterId": 2,
-      "ratedId": 3,
-      "score": 4
-    }
-  ],
   "beneficiaries": [
     {
       "id": "2",
@@ -54,7 +46,30 @@
       "gender": "Female",
       "contact": "123456789",
       "budget": 1500,
-      "status": "approved"
+      "status": "approved",
+      "ratings": [
+        {
+          "id": "1",
+          "ratingsrId": 2,
+          "ratingsdId": 3,
+          "score": 4
+        },
+        {
+          "score": 4,
+          "ratingsrId": "2",
+          "ratingsdId": "2"
+        },
+        {
+          "score": 2,
+          "ratingsrId": "2",
+          "ratingsdId": "2"
+        },
+        {
+          "score": 3,
+          "ratingsrId": "2",
+          "ratingsdId": "2"
+        }
+      ]
     },
     {
       "id": "3",
@@ -63,7 +78,8 @@
       "gender": "Male",
       "contact": "987654321",
       "budget": 2000,
-      "status": "Pending"
+      "status": "Pending",
+      "ratings": []
     },
     {
       "id": "e772",
@@ -72,7 +88,19 @@
       "gender": "Male",
       "contact": "01201500975",
       "budget": 1200,
-      "status": "Pending"
+      "status": "Pending",
+      "ratings": [
+        {
+          "score": 3,
+          "ratingsrId": "2",
+          "ratingsdId": "e772"
+        },
+        {
+          "score": 2,
+          "ratingsrId": "2",
+          "ratingsdId": "e772"
+        }
+      ]
     },
     {
       "id": "6f48",
@@ -83,7 +111,8 @@
       "email": "sayedh@mail.ru",
       "contact": "01201500095",
       "role": "Beneficiary",
-      "status": "Pending"
+      "status": "Pending",
+      "ratings": []
     },
     {
       "id": "ec1b",
@@ -94,7 +123,8 @@
       "email": "sayedhanddy975@gmail.com",
       "contact": "616513132132",
       "role": "Beneficiary",
-      "status": "Approved"
+      "status": "Approved",
+      "ratings": []
     },
     {
       "id": "4dad",
@@ -105,7 +135,14 @@
       "email": "sayedhaddny975@gmail.com",
       "contact": "616513132132",
       "role": "Beneficiary",
-      "status": "Pending"
+      "status": "Pending",
+      "ratings": [
+        {
+          "score": 4,
+          "ratingsrId": "2",
+          "ratingsdId": "4dad"
+        }
+      ]
     }
   ]
 }

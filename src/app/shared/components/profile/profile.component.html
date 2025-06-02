@@ -33,5 +33,9 @@
       </tbody>
     </table>
     <button class="btn btn-primary" routerLink="../../">Go Back</button>
+    @if(!(beneficiaryDetails()?.id === authSrv.getCurrentUser()?.id)) {
+      <!-- <button class="btn btn-warning ms-2" routerLink="/beneficiary/edit">Edit Profile</button> -->
+      <button class="btn btn-success ms-2" type="button" (click)="rateBeneficiary(beneficiaryDetails()?.id || null )">Rate</button>
+    }
   </div>
 </div>

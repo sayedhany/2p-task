@@ -53,12 +53,17 @@
           <td>{{ b.contact }}</td>
           <td><span class="p-1" [style]="getStatusStyles(b.status)">{{ b.status }}</span></td>
           <td class="d-flex gap-2">
-            @if((authSrv.getCurrentUser()?.role === 'Admin') && b.status === 'Pending') {
+            @if((authSrv.isAdmin()) && b.status === 'Pending') {
             <button class="btn btn-link p-0" (click)="approveBeneficiary(b.id)">
               Approve
             </button>
           }
-            <button class="btn btn-link p-0" [routerLink]="['/admin/profile', b.id]">
+          @if (authSrv.isBeneficiary()){
+            <button class="btn btn-link p-0" (click)="rateBeneficiary(b.id)">
+              Rate
+            </button>
+          }
+            <button class="btn btn-link p-0" (click)="viewBeneficiary(b.id)">
               View
             </button>
           </td>

@@ -1,5 +1,5 @@
-<div class="admin-dashboard">
-  @if (authSrv.getCurrentUser()?.role === 'Admin') {
+<div class="dashboard">
+  @if (authSrv.isAdmin()) {
     <h1 class="mb-4">Admin Dashboard</h1>
     <div >
       <button class="btn btn-primary" type="button" routerLink="/admin/add-beneficiary">

@@ -3,16 +3,16 @@
 
   <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="card-body">
     <div class="mb-3">
-      <label class="form-label">Email</label>
-      <input type="email" formControlName="email" class="form-control" />
+      <label class="form-label" for="email">Email</label>
+      <input id="email" type="email" formControlName="email" class="form-control" />
       @if(submitted && f['email'].errors){
         <small class="text-danger">Valid email is required</small>
       }
     </div>
 
     <div class="mb-3">
-      <label class="form-label">Password</label>
-      <input type="password" formControlName="password" class="form-control" />
+      <label class="form-label" for="password">Password</label>
+      <input id="password" type="password" formControlName="password" class="form-control" />
       @if (submitted && f['password'].errors){
         <small class="text-danger">Password is required</small>
       }
@@ -20,8 +20,8 @@
     </div>
 
     <div class="mb-3">
-      <label class="form-label">Role</label>
-      <select formControlName="role" class="form-control">
+      <label class="form-label" for="role">Role</label>
+      <select id="role" formControlName="role" class="form-control">
         <option value="" disabled selected>Select role</option>
         <option value="Admin">Admin</option>
         <option value="Beneficiary">Beneficiary</option>
