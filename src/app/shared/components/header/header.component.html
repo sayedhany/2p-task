@@ -2,7 +2,7 @@
   <a class="navbar-brand fw-bold" routerLink="/">Sayed</a>
   <div class="ms-auto d-flex align-items-center">
     @if(authSrv.getCurrentUser()){
-      <button class="btn btn-outline-secondary me-2" [routerLink]="['/profile', authSrv.getCurrentUser()?.id]">View Profile</button>
+      <button class="btn btn-outline-secondary me-2" [routerLink]="['/profile', authSrv.getCurrentUser()?.id]" [queryParams]="{ viewProfile: true }">View Profile</button>
       <button class="btn btn-outline-success me-2" (click)="authSrv.logout()">Logout</button>
     }@else {
       <button class="btn btn-outline-primary me-2" routerLink="/auth/login">Login</button>

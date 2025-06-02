@@ -5,7 +5,10 @@
       "name": "Admin User",
       "email": "admin@example.com",
       "password": "admin123",
-      "role": "Admin"
+      "role": "Admin",
+      "age": 28,
+      "gender": "Female",
+      "contact": "123456789"
     },
     {
       "id": "2",

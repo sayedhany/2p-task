@@ -11,7 +11,7 @@ npm install
 ```
 
 2. **Start the JSON Server**  
-  Make sure you have `json-server` installed globally:
+   Make sure you have `json-server` installed globally:
 
 ```bash
 npm install -g json-server
@@ -24,7 +24,7 @@ json-server --watch db.json --port 3001
 ```
 
 3. **Start the application**  
-  In a new terminal, run:
+   In a new terminal, run:
 
 ```bash
 npm start
@@ -33,6 +33,27 @@ npm start
 The app should now be running and connected to the JSON server.
 
 You can access the project at [http://localhost:4200](http://localhost:4200).
+
+---
+
+## User Accounts
+
+The application supports two types of user accounts:
+
+- **Admin**
+
+  - Has full access to manage tasks and users.
+  - Example credentials:
+    - email: `admin@example.com`
+    - Password: `admin123`
+
+- **Beneficiary**
+  - Can view and manage their own tasks.
+  - Example credentials:
+    - email: `sarah@example.com`
+    - Password: `sarah123`
+
+You can modify or add user accounts in the `db.json` file under the `users` section.
 
 ---
 

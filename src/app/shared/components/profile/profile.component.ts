@@ -25,15 +25,20 @@ export class ProfileComponent implements OnInit {
   beneficiarySrv = inject(BeneficiaryService);
   authSrv = inject(AuthService);
   router = inject(Router);
-  beneficiaryDetails = signal<Beneficiary | null>(null);
+  details = signal<Beneficiary | null>(null);
   // constructor(private route: ActivatedRoute) {}
   ngOnInit(): void {
     const id = this.route.snapshot.paramMap.get('id') as string;
-    this.beneficiarySrv
-      .getBeneficiaryById(id)
-      .subscribe((beneficiary: Beneficiary) => {
-        this.beneficiaryDetails.set(beneficiary);
-      });
+    const viewProfile = this.route.snapshot.queryParamMap.get('viewProfile');
+    if (viewProfile) {
+      this.details.set(this.authSrv.getCurrentUser() as any);
+    } else {
+      this.beneficiarySrv
+        .getBeneficiaryById(id)
+        .subscribe((beneficiary: Beneficiary) => {
+          this.details.set(beneficiary);
+        });
+    }
   }
   async rateBeneficiary(id: string | null) {
     const { value: rating } = await Swal.fire({
