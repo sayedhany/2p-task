@@ -1,8 +1,14 @@
 <div class="admin-dashboard">
-  <div class="d-flex justify-content-center">
-    <button class="btn btn-primary" type="button" routerLink="/admin/add-beneficiary">
-    Add Beneficiary
-  </button>
-  </div>
+  @if (authSrv.getCurrentUser()?.role === 'Admin') {
+    <h1 class="mb-4">Admin Dashboard</h1>
+    <div >
+      <button class="btn btn-primary" type="button" routerLink="/admin/add-beneficiary">
+        Add Beneficiary
+      </button>
+    </div>
+  } @else {
+    <h1 class="text-center mb-4">Beneficiary Dashboard</h1>
+  }
+  
   <app-beneficiary-list/>
 </div>

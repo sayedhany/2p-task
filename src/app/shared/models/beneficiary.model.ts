@@ -1,3 +1,5 @@
+import { UserStatus } from '../../core/enums/role.enum';
+
 export interface Beneficiary {
   id: string;
   name: string;
@@ -5,5 +7,6 @@ export interface Beneficiary {
   age: number;
   gender: string;
   contact: string;
+  status: UserStatus; // Status of the beneficiary
   email?: string; // Optional field for email
 }

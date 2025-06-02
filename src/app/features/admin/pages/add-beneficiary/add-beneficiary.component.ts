@@ -7,7 +7,7 @@ import {
 } from '@angular/forms';
 import { BeneficiaryService } from '../../../../shared/services/beneficiary.service';
 import { Router } from '@angular/router';
-
+import Swal from '../../../../core/swal';
 @Component({
   selector: 'app-add-beneficiary',
   standalone: true,
@@ -42,12 +42,22 @@ export class AddBeneficiaryComponent {
 
     if (this.form.invalid) return;
 
-    const newBeneficiary = { ...this.form.value, role: 'Beneficiary' };
+    const newBeneficiary = {
+      ...this.form.value,
+      role: 'Beneficiary',
+      status: 'Pending',
+    };
 
     // TODO: Send to backend service
     console.log('✅ Beneficiary saved:', newBeneficiary);
     this.beneficiarySrv.addBeneficiary(newBeneficiary).subscribe((res: any) => {
-      this.router.navigate(['/admin']);
+      Swal.fire({
+        icon: 'success',
+        title: 'Beneficiary Added',
+        text: 'The beneficiary has been successfully added.',
+      }).then(() => {
+        this.router.navigate(['/admin']);
+      });
     });
 
     this.form.reset();

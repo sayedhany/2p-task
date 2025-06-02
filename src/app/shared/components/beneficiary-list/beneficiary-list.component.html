@@ -37,7 +37,10 @@
         <th>Age</th>
         <th>Gender</th>
         <th>Contact</th>
-        <th>View</th>
+        <th>Status</th>
+        <th>Actions</th>
+        
+        
       </tr>
     </thead>
     <tbody>
@@ -48,11 +51,18 @@
           <td>{{ b.age }}</td>
           <td>{{ b.gender }}</td>
           <td>{{ b.contact }}</td>
-          <td>
+          <td><span class="p-1" [style]="getStatusStyles(b.status)">{{ b.status }}</span></td>
+          <td class="d-flex gap-2">
+            @if((authSrv.getCurrentUser()?.role === 'Admin') && b.status === 'Pending') {
+            <button class="btn btn-link p-0" (click)="approveBeneficiary(b.id)">
+              Approve
+            </button>
+          }
             <button class="btn btn-link p-0" [routerLink]="['/admin/profile', b.id]">
-              view
+              View
             </button>
           </td>
+          
         </tr>
       }
     </tbody>

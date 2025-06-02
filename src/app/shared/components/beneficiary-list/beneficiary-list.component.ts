@@ -4,13 +4,15 @@ import {
   Component,
   computed,
   inject,
+  OnInit,
   signal,
 } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { Beneficiary } from '../../models/beneficiary.model';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { BeneficiaryService } from '../../services/beneficiary.service';
-
+import { AuthService } from '../../../core/auth/auth.service';
+import Swal from '../../../core/swal';
 @Component({
   selector: 'app-beneficiary-list',
   standalone: true,
@@ -19,11 +21,14 @@ import { BeneficiaryService } from '../../services/beneficiary.service';
   styleUrl: './beneficiary-list.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class BeneficiaryListComponent {
+export class BeneficiaryListComponent implements OnInit {
   // Signals
-  beneficiarySrv = inject(BeneficiaryService);
-  private _beneficiaries = toSignal(this.beneficiarySrv.getBeneficiaries());
-
+  public beneficiarySrv = inject(BeneficiaryService);
+  private _beneficiaries = toSignal(this.beneficiarySrv.beneficiaries$);
+  public authSrv = inject(AuthService);
+  ngOnInit(): void {
+    this.beneficiarySrv.getBeneficiaries();
+  }
   searchTerm = signal('');
   sortField = signal<'name' | 'budget'>('name');
   sortDirection = signal<'asc' | 'desc'>('asc');
@@ -64,6 +69,44 @@ export class BeneficiaryListComponent {
     } else {
       this.sortField.set(field);
       this.sortDirection.set('asc');
+    }
+  }
+  approveBeneficiary(id: string) {
+    Swal.fire({
+      title: 'Are you sure?',
+      text: 'You won’t be able to revert this!',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'Yes, approve it!',
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.beneficiarySrv.approveBeneficiary(id).subscribe({
+          next: () => {
+            Swal.fire(
+              'Approved!',
+              'The beneficiary has been approved.',
+              'success'
+            ).then(() => {
+              this.beneficiarySrv.getBeneficiaries();
+            });
+          },
+          error: () => {
+            Swal.fire('Error', 'An error occurred while approving.', 'error');
+          },
+        });
+      }
+    });
+  }
+  getStatusStyles(status: string): { color: string; background: string } {
+    switch (status) {
+      case 'Approved':
+        return { color: '#155724', background: '#d4edda' };
+      case 'Pending':
+        return { color: '#856404', background: '#fff3cd' };
+      case 'Rejected':
+        return { color: '#721c24', background: '#f8d7da' };
+      default:
+        return { color: '#6c757d', background: '#e2e3e5' };
     }
   }
 }
