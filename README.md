@@ -1,27 +1,35 @@
 # TaskApp
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 18.2.19.
+## Getting Started
 
-## Development server
+Follow these steps to run the project:
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+1. **Install dependencies**
 
-## Code scaffolding
+```bash
+npm install
+```
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+2. **Start the JSON Server**  
+   Make sure you have `json-server` installed globally:
 
-## Build
+```bash
+npm install -g json-server
+```
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+Then start the server using your `db.json` file on port 3001:
 
-## Running unit tests
+```bash
+json-server --watch db.json --port 3001
+```
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+3. **Start the application**  
+   In a new terminal, run:
 
-## Running end-to-end tests
+```bash
+npm start
+```
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+The app should now be running and connected to the JSON server.
 
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+You can access the project at [http://localhost:4200](http://localhost:4200).
