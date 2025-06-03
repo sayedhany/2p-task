@@ -42,13 +42,13 @@ The application supports two types of user accounts:
 
 - **Admin**
 
-  - Has full access to manage tasks and users.
+  - Can Approve and Add.
   - Example credentials:
     - email: `admin@example.com`
     - Password: `admin123`
 
 - **Beneficiary**
-  - Can view and manage their own tasks.
+  - Can view and rate others.
   - Example credentials:
     - email: `sarah@example.com`
     - Password: `sarah123`
