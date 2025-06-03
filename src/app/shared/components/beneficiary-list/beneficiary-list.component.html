@@ -50,7 +50,7 @@
             <td>{{ b.age }}</td>
             <td>{{ b.gender }}</td>
             <td>{{ b.contact }}</td>
-            <td><span class="p-1" [style]="getStatusStyles(b.status)">{{ b.status }}</span></td>
+            <td><span class="p-1 rounded-1" [style]="getStatusStyles(b.status)">{{ b.status }}</span></td>
             <td class="d-flex gap-2">
               @if((authSrv.isAdmin()) && b.status === 'Pending') {
               <button class="btn btn-link p-0" (click)="approveBeneficiary(b.id)">

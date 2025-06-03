@@ -40,9 +40,11 @@
         <ul class="list-group mb-3">
           <li class="list-group-item">
             Score: {{ rating.score }}
-            <span class="text-muted ms-2">(From: {{ rating.ratingsrId }}, To: {{ rating.ratingsdId }})</span>
+            <span class="text-muted ms-2">(From: {{ rating.ratingsrId }})</span>
           </li>
         </ul>
+      } @empty {
+        <p class="text-muted">No ratings available.</p>
       }
     }
     <button class="btn btn-primary" routerLink="../">Go Back</button>

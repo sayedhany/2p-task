@@ -49,30 +49,8 @@
       "gender": "Female",
       "contact": "123456789",
       "budget": 1500,
-      "status": "approved",
-      "ratings": [
-        {
-          "id": "1",
-          "ratingsrId": 2,
-          "ratingsdId": 3,
-          "score": 4
-        },
-        {
-          "score": 4,
-          "ratingsrId": "2",
-          "ratingsdId": "2"
-        },
-        {
-          "score": 2,
-          "ratingsrId": "2",
-          "ratingsdId": "2"
-        },
-        {
-          "score": 3,
-          "ratingsrId": "2",
-          "ratingsdId": "2"
-        }
-      ]
+      "status": "Approved",
+      "ratings": []
     },
     {
       "id": "3",
@@ -81,7 +59,7 @@
       "gender": "Male",
       "contact": "987654321",
       "budget": 2000,
-      "status": "approved",
+      "status": "Approved",
       "ratings": []
     },
     {
@@ -92,28 +70,7 @@
       "contact": "01201500975",
       "budget": 1200,
       "status": "Pending",
-      "ratings": [
-        {
-          "score": 3,
-          "ratingsrId": "2",
-          "ratingsdId": "e772"
-        },
-        {
-          "score": 2,
-          "ratingsrId": "2",
-          "ratingsdId": "e772"
-        },
-        {
-          "score": 4,
-          "ratingsrId": "2",
-          "ratingsdId": "e772"
-        },
-        {
-          "score": 4,
-          "ratingsrId": "2",
-          "ratingsdId": "e772"
-        }
-      ]
+      "ratings": []
     },
     {
       "id": "6f48",
@@ -137,13 +94,7 @@
       "contact": "616513132132",
       "role": "Beneficiary",
       "status": "Approved",
-      "ratings": [
-        {
-          "score": 4,
-          "ratingsrId": "2",
-          "ratingsdId": "ec1b"
-        }
-      ]
+      "ratings": []
     },
     {
       "id": "4dad",
@@ -155,13 +106,7 @@
       "contact": "616513132132",
       "role": "Beneficiary",
       "status": "Pending",
-      "ratings": [
-        {
-          "score": 4,
-          "ratingsrId": "2",
-          "ratingsdId": "4dad"
-        }
-      ]
+      "ratings": []
     }
   ]
 }

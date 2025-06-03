@@ -25,7 +25,7 @@ export class BeneficiaryService {
     // For json-server, use PUT to update the whole object or PATCH for partial update
     return this.http.patch<Beneficiary>(
       `${environment.baseUrl}/beneficiaries/${beneficiaryId}`,
-      { status: 'approved' }
+      { status: 'Approved' }
     );
   }
   getBeneficiaryById(beneficiaryId: string): Observable<Beneficiary> {
@@ -39,9 +39,23 @@ export class BeneficiaryService {
   ): Observable<Beneficiary> {
     return this.getBeneficiaryById(beneficiaryId).pipe(
       switchMap((beneficiary) => {
-        const updatedRatings = Array.isArray(beneficiary.ratings)
-          ? [...beneficiary.ratings, rating]
-          : [rating];
+        let updatedRatings;
+        if (Array.isArray(beneficiary.ratings)) {
+          const existingIndex = beneficiary.ratings.findIndex(
+            (r) => String(r.ratingsrId) === rating.ratingsrId
+          );
+          if (existingIndex !== -1) {
+            // Override the score for the existing rating
+            updatedRatings = beneficiary.ratings.map((r, idx) =>
+              idx === existingIndex ? { ...r, score: rating.score } : r
+            );
+          } else {
+            // Add new rating
+            updatedRatings = [...beneficiary.ratings, rating];
+          }
+        } else {
+          updatedRatings = [rating];
+        }
         return this.http.patch<Beneficiary>(
           `${environment.baseUrl}/beneficiaries/${beneficiaryId}`,
           { ratings: updatedRatings }

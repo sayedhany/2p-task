@@ -21,6 +21,7 @@ export const routes: Routes = [
           import('./features/dashboard/dashboard.component').then(
             (e) => e.DashboardComponent
           ),
+        data: { title: 'Dashboard' },
       },
       {
         path: 'add-beneficiary',
@@ -29,6 +30,7 @@ export const routes: Routes = [
           import('./features/add-beneficiary/add-beneficiary.component').then(
             (e) => e.AddBeneficiaryComponent
           ),
+        data: { title: 'Add Beneficiary' },
       },
       {
         path: 'profile/:id',
@@ -36,6 +38,7 @@ export const routes: Routes = [
           import('./features/profile/profile.component').then(
             (e) => e.ProfileComponent
           ),
+        data: { title: 'Profile' },
       },
     ],
   },
